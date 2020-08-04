@@ -1,0 +1,37 @@
+﻿@model GuestbookViewModel
+@{
+    ViewData["Title"] = "Guestbook";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>This is a Redis-based guestbook</p>
+
+        @using (Html.BeginForm("Add", "Home", FormMethod.Post))
+        {
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="posttext" class="col-sm-2 col-form-label">Text</label>
+                <div class="col-sm-10">
+                    <textarea id="text" name="posttext" class="form-control"></textarea>
+                </div>
+            </div>
+
+            <div>
+                @*<input type="submit" class="btn" value="Post" />*@
+                <button type="submit" class="btn btn-primary">Post</button>
+            </div>
+        }
+
+        @foreach (var record in Model.Records)
+        {
+            <div><p><b>@record.Name</b> posted on @record.AddedOn.ToString("yyyy-MM-dd hh:mm:ss"):</p></div>
+            <div>@record.PostText</div>
+        }
+    </div>
